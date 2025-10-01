@@ -1740,7 +1740,7 @@ overlay.innerHTML = `
       if (el.offsetWidth === 0 || el.offsetHeight === 0) return false;
       const r = el.getBoundingClientRect();
       // 与视口有交集就算“可见”
-      return (r.bottom > 0 && r.top < vh && r.right > 0 && r.left < vw);
+      return (r.bottom > -10 && r.top < vh + 10 && r.right > -10 && r.left < vw + 10);
     });
     return visible.length;
   }
@@ -1774,7 +1774,7 @@ overlay.innerHTML = `
       e.preventDefault();
 
       // 先动态侦测当前可见 logo 数量（把它当作正确答案）
-      const expected = countVisibleDVDLogos();
+      const expected = document.querySelectorAll('.dvd-logo').length;
       // 记录到 storage（方便调试/后续使用）
       sessionStorage.setItem('dvdVisibleCount', String(expected));
 
